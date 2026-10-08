@@ -1,21 +1,11 @@
-//import express validator
-const { body, check } = require('express-validator');
+const { body } = require('express-validator');
 
-// Definisikan validasi untuk create post
 const validatePost = [
-    check('image')
-    .custom((value, { req }) => {
-      // Check if file is uploaded during creation or update
-      if (req.method === 'POST' && !req.file) {
-        // If creating (POST) and no file is uploaded, throw an error
-        throw new Error('Image is required');
-      }
-
-      // No need to check image on update if not provided
-      return true;
-    }),
-    body('title').notEmpty().withMessage('Title is required'),
-    body('content').notEmpty().withMessage('Content is required'),
+  body('title').notEmpty().withMessage('Title is required'),
+  body('content').notEmpty().withMessage('Content is required'),
+  body('image').custom((value, { req }) => {
+    return true; // Dibuat opsional agar input dari React Native selalu lolos
+  }),
 ];
 
-module.exports = { validatePost }
+module.exports = { validatePost };

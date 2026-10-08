@@ -42,6 +42,6 @@ app.get('/uploads/:filename', (req, res) => {
 });
 
 //start server
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-})
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Server berjalan di http://192.168.100.157:3000');
+});
